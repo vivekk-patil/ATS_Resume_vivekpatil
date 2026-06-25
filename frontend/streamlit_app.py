@@ -58,6 +58,22 @@ def load_css():
 
 st.markdown(load_css(), unsafe_allow_html=True)
 
+def show_footer():
+    st.markdown("""
+    <footer style="
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        color: black;
+        font-size: 14px;
+    ">
+        © 2026 ATS Resume Scorer | Developed by Vivek Satish Patil
+    </footer>
+    """, unsafe_allow_html=True)
+
+st.markdown(load_css(), unsafe_allow_html=True)
+
 # Initialize session state for view management
 if 'current_view' not in st.session_state:
     st.session_state.current_view = 'landing'
@@ -176,17 +192,4 @@ elif st.session_state.current_view == 'resources':
     from frontend.views import resources
     resources.render()
 
-
-def show_footer():
-    st.markdown("""
-    <footer style="
-        text-align: center;
-        padding: 15px;
-        margin-top: 20px;
-        border-top: 1px solid #ddd;
-        color: black;
-        font-size: 14px;
-    ">
-        © 2026 ATS Resume Scorer | Developed by Vivek Satish Patil
-    </footer>
-    """, unsafe_allow_html=True)
+show_footer()
