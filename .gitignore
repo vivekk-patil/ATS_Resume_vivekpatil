@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 *.pyo
 .streamlit/secrets.toml
+frontend/.streamlit/secrets.toml
 venv/
 .venv/
 
