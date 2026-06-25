@@ -175,3 +175,18 @@ elif st.session_state.current_view == 'resources':
     # Import and render resources page
     from frontend.views import resources
     resources.render()
+
+
+def show_footer():
+    st.markdown("""
+    <footer style="
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        color: black;
+        font-size: 14px;
+    ">
+        © 2026 ATS Resume Scorer | Developed by Vivek Satish Patil
+    </footer>
+    """, unsafe_allow_html=True)
