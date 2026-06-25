@@ -1,5 +1,7 @@
 import streamlit as st
 
+from frontend.streamlit_app import show_footer
+
 
 def render():
     
@@ -97,3 +99,5 @@ def render():
         #### 3️⃣ Get Actionable Feedback
         Receive detailed recommendations to improve your resume
         """)
+
+    show_footer()

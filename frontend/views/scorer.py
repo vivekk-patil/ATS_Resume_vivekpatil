@@ -5,6 +5,7 @@ import streamlit as st
 
 from frontend.services import api_client
 from frontend.components.dashboard import display_results_dashboard
+from frontend.streamlit_app import show_footer
 
 
 def _read_jd(jd_file, jd_text: str) -> str:
@@ -222,3 +223,5 @@ def render() -> None:
     st.success("✅ Analysis complete!")
     display_results_dashboard(analysis)
     _render_export_buttons(analysis)
+
+    show_footer()

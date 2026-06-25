@@ -1,5 +1,7 @@
 import streamlit as st
 
+from frontend.streamlit_app import show_footer
+
 
 def render():
     """Render the resources page"""
@@ -77,3 +79,4 @@ def render():
     # Resume Templates
     st.markdown("## 📄 ATS-Friendly Resume Templates")
     st.info("Coming soon: Downloadable ATS-optimized resume templates")
+    show_footer()
