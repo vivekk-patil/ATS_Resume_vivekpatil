@@ -72,5 +72,3 @@ def render() -> None:
                         st.rerun()
                     except requests.RequestException as exc:
                         _show_backend_error(exc)
-
-    show_footer()

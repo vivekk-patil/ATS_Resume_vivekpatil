@@ -79,4 +79,3 @@ def render():
     # Resume Templates
     st.markdown("## 📄 ATS-Friendly Resume Templates")
     st.info("Coming soon: Downloadable ATS-optimized resume templates")
-    show_footer()

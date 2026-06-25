@@ -223,5 +223,3 @@ def render() -> None:
     st.success("✅ Analysis complete!")
     display_results_dashboard(analysis)
     _render_export_buttons(analysis)
-
-    show_footer()

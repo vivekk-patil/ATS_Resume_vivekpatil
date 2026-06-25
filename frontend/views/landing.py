@@ -99,5 +99,3 @@ def render():
         #### 3️⃣ Get Actionable Feedback
         Receive detailed recommendations to improve your resume
         """)
-
-    show_footer()
