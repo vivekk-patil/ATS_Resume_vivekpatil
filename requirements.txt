@@ -1,6 +1,6 @@
 # CPU-only torch first (saves RAM on Render)
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch>=2.0.0+cpu
+torch==2.0.0+cpu
 
 # ── Backend: web framework ──
 fastapi>=0.110
