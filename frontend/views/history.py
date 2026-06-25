@@ -2,7 +2,6 @@ import requests
 import streamlit as st
 
 from frontend.services import api_client
-from frontend.streamlit_app import show_footer
 
 
 def _show_backend_error(exc: Exception) -> None:
