@@ -1,0 +1,18 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.streamlit/secrets.toml
+venv/
+.venv/
+
+
+.DS_Store
+
+# Logs
+*.log
+
+# ML models
+*.safetensors
+*.pkl
+
