@@ -38,7 +38,7 @@ def analyze_resume(
         files=files,
         data=data,
         headers=_auth_headers(access_token),
-        timeout=180,
+        timeout=300,
     )
     response.raise_for_status()
     return response.json()
