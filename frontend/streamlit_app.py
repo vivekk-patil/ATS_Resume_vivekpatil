@@ -2,24 +2,19 @@ import streamlit as st
 import sys
 from pathlib import Path
 
-# Put the repo root on sys.path so `from frontend.views import ...` resolves
-# regardless of the directory streamlit was launched from.
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Configure page
 st.set_page_config(
-    page_title="ATS Resume Scorer",
+    page_title="ATS Resume Scorer by VSP",
     page_icon="🎯",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Auth state. Populated by Supabase sign-in / sign-up / OAuth.
-# All four are None when signed out, all four are set when signed in.
 for key, default in [
     ("access_token", None),
     ("refresh_token", None),
-    ("user_id", None),       # Supabase auth user id (uuid); also used by api_client
+    ("user_id", None),
     ("user_email", None),
     ("auth_error", None),
     ("auth_info", None),
@@ -27,16 +22,12 @@ for key, default in [
     if key not in st.session_state:
         st.session_state[key] = default
 
-# If we just came back from Google OAuth, Supabase appends `?code=<authcode>`
-# to the redirect URL. Exchange it for a session before rendering anything.
 if (
     not st.session_state.access_token
     and "code" in st.query_params
 ):
     from frontend.services import supabase_client
     result = supabase_client.exchange_code_for_session(st.query_params["code"])
-
-    #Always clear the ?code= param so a refresh doesn't try to re-exchange.
     st.query_params.clear()
     if "error" in result:
         st.session_state.auth_error = f"Google sign-in failed: {result['error']}"
@@ -47,7 +38,6 @@ if (
         st.session_state.user_email    = result["email"]
         st.rerun()
 
-#Load custom CSS
 def load_css():
     try:
         css_path = Path(__file__).parent / 'assets' / 'styles.css'
@@ -56,13 +46,26 @@ def load_css():
     except FileNotFoundError:
         return ''
 
+def show_footer():
+    st.markdown("""
+    <footer style="
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+    ">
+        © 2026 ATS Resume Scorer | Developed by Vivek Satish Patil
+    </footer>
+    """, unsafe_allow_html=True)
+
 st.markdown(load_css(), unsafe_allow_html=True)
 
-# Initialize session state for view management
 if 'current_view' not in st.session_state:
     st.session_state.current_view = 'landing'
 
-# Sidebar navigation
 with st.sidebar:
     st.markdown("## Navigation")
     
@@ -88,7 +91,6 @@ with st.sidebar:
     from frontend.services import supabase_client
 
     if st.session_state.access_token:
-        # Signed-in state: show email + sign-out button.
         st.caption(f"Signed in as **{st.session_state.user_email}**")
         if st.button("Sign out", use_container_width=True):
             supabase_client.sign_out()
@@ -96,7 +98,6 @@ with st.sidebar:
                 st.session_state[k] = None
             st.rerun()
     else:
-        # Signed-out state: tabs for sign-in vs sign-up + Google OAuth button.
         if st.session_state.auth_error:
             st.error(st.session_state.auth_error)
             st.session_state.auth_error = None
@@ -155,23 +156,21 @@ with st.sidebar:
                 use_container_width=True,
             )
 
-# Main content area - render based on current view
+# Main content
 if st.session_state.current_view == 'landing':
-    # Import and render landing page
     from frontend.views import landing
     landing.render()
 
 elif st.session_state.current_view == 'scorer':
-    # Import and render scorer page
     from frontend.views import scorer
     scorer.render()
 
 elif st.session_state.current_view == 'history':
-    # Import and render history page
     from frontend.views import history
     history.render()
 
 elif st.session_state.current_view == 'resources':
-    # Import and render resources page
     from frontend.views import resources
     resources.render()
+
+show_footer()

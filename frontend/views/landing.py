@@ -29,6 +29,7 @@ def render():
         <h1>🎯 ATS Resume Scorer</h1>
         <h3>Optimize Your Resume for Applicant Tracking Systems</h3>
         <p>Get instant feedback on your resume's ATS compatibility with AI-powered analysis</p>
+        <p><strong>Developed by Vivek Satish Patil</strong></p>
     </div>
     """, unsafe_allow_html=True)
     
